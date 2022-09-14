@@ -1,0 +1,62 @@
+extends layout 
+block content  
+  h1(style='color: #FE7D6A')=title
+  form.player_form(method='POST', action='', enctype="multipart/form-data")
+    .form-group 
+      label(for='full_name', style='color: red') Full Name: 
+      input#full_name.form-control(type='text', placeholder='Full name of player (ex: Lionel Messi)', required=true, name='full_name', value=(undefined===player ? '' : player.full_name) )
+    .form-group
+      label(for='age', style='color: red') Age: 
+      input#age.form-control(type='number', placeholder="Enter the player's age", required=true, name='age', value=(player===undefined ? '' : player.age),
+        onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57")
+      // the condition above will only allow whole number for the age, not neg or decimal values
+    
+    .form-group
+      label(for='position', style='color: red') Position:
+      select#position.form-control(type='select', placeholder='Select the position of player', 
+        name='position', required='true')
+        option(value='Goalkeeper') Goalkeeper 
+        option(value='Full-Back') Full-Back
+        option(value='Wing-Back') Wing-Back 
+        option(value='Centre-Back') Centre-Back
+        option(value='Sweeper') Sweeper
+        option(value='Centre Midfield') Centre Midfield 
+        option(value='Defensive Midfield') Defensive Midfield 
+        option(value='Attacking Midfield') Attacking Midfield 
+        option(value='Centre Forward') Centre Forward 
+        option(value='Winger') Winger
+        option(value='Second Striker') Second Striker 
+        option(value='Striker') Striker 
+    .form-group
+      label(for='league', style='color: red') Choose your league: 
+      select#league.form-control(type='select', placeholder='Select league', name='league', required=true)
+        each league in all_leagues
+          // if page has rendered and encountered error(player has been there previously) 
+          option(value=league._id) #{league.league_name}
+    .form-group
+      // value of team is in the form of an array of size 3: [team._id, team.league._id, team.club_name]
+      // value of player is in the form of an array of size 3: [player.team._id, player.league._id, player.team.club_name]
+      if player
+        option#player(value=`["${player.team._id}", "${player.league._id}", "${player.team.club_name}", "${player.full_name}", ${player.age}]`)
+      label(for='team', style='color: red') Choose your team: 
+      select#team.form-control(type='select', placeholder='Select team', name='team', required=true)
+        each team in all_teams 
+          option(value=`["${team._id}", "${team.league._id}", "${team.club_name}"]`) #{team.club_name}
+    .form-group 
+      label(for='photo', style='color: red') Upload a photo of your player (images ONLY, no pdf)
+      input#photo.form-control(type='file', name='photo', style='background-color: transparent; border: none')   
+    if player 
+      .form-group 
+        label(for='password', style='font-size: 25px; color: red') Enter your authorized password to update this player: 
+        input#password_update.form-control(type='password', placeholder = "Password ...", required=true, name='password')  
+        br
+    button.btn.btn-primary(type='submit', style='background-color: #FE7D6A; border-color: #FE7D6A') Submit
+
+  if errors
+    p errors spotted
+    ul
+      for error in errors
+        li!= error.msg
+  if password != undefined && password === false 
+    h1 Wrong Password! Please try again.
+  script(src='/javascripts/player_form.js')

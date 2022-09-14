@@ -1,0 +1,11 @@
+extends layout 
+
+block content
+  h1(style='color: #FE7D6A')=title 
+  br
+  ul
+    each player in all_players 
+      li 
+        a(href=player.url, style="font-size: 25px; color: red") #{player.full_name}, (#{player.team.club_name})
+    else 
+      p There are currently no players in your squad

@@ -1,0 +1,14 @@
+extends layout 
+
+block content 
+  h1=title
+  p Do you really want to delete this player? 
+  h3(style='color: red') Name: #{player.full_name}
+  h3(style='color: red') Age: #{player.age}
+  h3(style='color: red') Position: #{player.position}
+  h3(style='color: red') Team: #{player.team.club_name}
+  h3(style='color: red') League: #{player.league.league_name}
+  form(method='POST', action='')
+    div.form-group
+      input#playerid.form-control(type='hidden', name='playerid', required='true', value=player._id)
+    button.btn.btn-primary(type='submit', style='background-color: red; border-color: red') Delete

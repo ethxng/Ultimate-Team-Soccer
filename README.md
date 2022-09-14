@@ -1,2 +1,2 @@
 # Ultimate-Team-Soccer
-In this project, I will be building an application that stores soccer players in a database and implementing CRUD operations using Node.js, Express, and Pug
+In this project, I will be building an application that stores soccer players in a database and implementing CRUD operations using Node.js, Express, and Pug. I will be using MongoDB as the database. You will be able to add your favorite player into the team that you create, and add a team into a league that you create.In the end, you will have a squad of players, from various different teams in various different leagues. 

@@ -1,0 +1,20 @@
+extends layout 
+
+block content  
+  h1(style='color: #A45EE9')=title 
+  .team_detail 
+    p(style="color: #6D2AFF; font-weight: bold; font-size: 25px") Club Name: #{team.club_name}
+    p(style="color: #6D2AFF; font-weight: bold; font-size: 25px") Coach: #{team.coach_name}
+    p(style="color: #6D2AFF; font-weight: bold; font-size: 25px") Team color: #{team.logo_color.toUpperCase()}
+    h2(style='color: #A45EE9') Players: 
+    ul
+      each player in players
+        li
+          a(href=player.url, style='color: #6D2AFF; font-size: 23px') #{player.full_name}, #{player.position}
+      else 
+        p(style='font-size: 23px') There are currently no players in this team yet.
+    br 
+    p
+      a(href=team.url + '/update', style="font-size: 30px") Update Team
+      p
+      a(href=team.url + '/delete', style='font-size: 30px') Delete Team

@@ -1,0 +1,21 @@
+extends layout 
+
+block content 
+  h1=title 
+  if all_players.length != 0 && all_teams.length != 0
+    h3 Delete player(s) associated with this league before deleting this league: 
+    ul
+      each player in all_players
+        li(style='font-size: 35px; color: red')=player.full_name
+    br 
+    h3 Delete all team(s) associated with this league before deleting this league: 
+    ul 
+      each team in all_teams 
+        li(style='font-size: 35px; color: #A45EE9')=team.club_name
+  else 
+    h2 Are you sure you want to delete this league?
+    form(method='POST', action='')
+      div.form-group
+        input#leagueid.form-control(type='hidden', name='leagueid', required='true', value= league._id)
+      button.btn.btn-primary(type='submit') Delete
+      

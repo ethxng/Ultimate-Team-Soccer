@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+  h1(style='color: #A45EE9')=title
+
+  ul 
+    each team in all_teams 
+      li 
+        a(href=team.url, style="font-size: 25px; color: #6D2AFF") #{team.club_name}, 
+          | (Coached by #{team.coach_name})
+    else
+      p There is currently no team present. Add some!

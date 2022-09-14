@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+  h1(style="color: #4CAF50")=title
+
+  ul
+    each league in all_leagues 
+      li 
+        a(href=league.url, style='font-size: 25px; color: #3DB489') #{league.league_name}, located in 
+          | #{league.country}
+    else 
+      p There are currently no league yet. Add some

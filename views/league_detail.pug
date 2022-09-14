@@ -1,0 +1,20 @@
+extends layout
+
+block content 
+  h1(style='color: #4CAF50')=title
+  br
+  p(style="color: #3DB489; font-weight: bold; font-size: 25px") League Name: #{league.league_name}
+  p(style="color: #3DB489; font-weight: bold; font-size: 25px") Country of Origin: #{league.country}
+  br
+  h2(style='color: #4CAF50') All teams in this league: 
+  ul 
+    each team in all_teams
+      li
+        a(href=team.url, style="color: #3DB489; font-weight: bold; font-size: 23px") #{team.club_name}
+    else
+      p(style='font-size: 23px') There are currently no teams in this league.
+  br
+  p
+    a(href=league.url+'/update', style='font-size: 30px') Update League
+    p
+    a(href=league.url + '/delete', style='font-size: 30px') Delete League

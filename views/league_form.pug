@@ -1,0 +1,24 @@
+extends layout 
+
+block content 
+  h1(style='color: #4CAF50')=title
+
+  form.league_form(method='POST', action='')
+    .form-group
+      label(for="league_name", style='color: #3DB489') Enter your league name: 
+      input#league_name.form-control(type='text', required=true, name='league_name', placeholder='Enter the name of your league (ex: LaLiga)', value=(league===undefined ? '' : league.league_name))
+    .form-group
+      label(for='country', style='color: #3DB489') Enter the country of your league:
+      input#country.form-control(type='text', required=true, name="country", placeholder="The country of your league (ex: England)", value=(league===undefined ? '' : league.country))
+    if league
+      .form-group
+        label(for='password', style='font-size: 25px; color: red') Enter your authorized password to update this league:
+        input#league_update.form-control(type='password', required=true, name='password', placeholder="Password ...")
+    button.btn.btn-primary(type='submit', style='background-color: #4CAF50; border-color: #4CAF50') Submit
+  if errors
+    p errors spotted
+    ul
+      each error in errors
+        li!=error.msg
+  if password != undefined && password === false 
+    h1(style='font-size: 40px; color: red') Wrong Password! Please try again.

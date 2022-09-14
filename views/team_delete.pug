@@ -1,0 +1,18 @@
+extends layout
+
+block content 
+  h1=title
+  if all_players.length != 0
+    br
+    h3 Delete all of these player(s) before delete this team: 
+    ul
+      each player in all_players 
+        li(style='font-size: 35px; color: red')=player.full_name
+  else
+    h2 Are you sure you want to delete this team?
+    form(method='POST', action='')
+      div.form-group
+        input#teamid.form-control(type='hidden', name='teamid', required='true', value= team._id)
+      button.btn.btn-primary(type='submit') Delete
+    
+    

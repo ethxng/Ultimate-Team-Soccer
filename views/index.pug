@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to your #[strong Ultimate Squad], where you can add your favorite players of all time to your team.
+
+  h1 Your Squad
+
+  if error 
+    p Error loading data ;(
+  else 
+    #area
+      for player in all_players
+        .box(style='border: 5px solid ' + player.team.logo_color)
+          if player.photo != undefined
+            img.pic(src = '/images/' + player.photo alt="athlete picture")
+          else
+            img.pic(src = '/images/who.png' alt="athlete picture (unknown)")
+          p(style="color: black; font-weight: bold; font-size: 20px") Name: #{player.full_name}
+          p(style="color: black; font-weight: bold; font-size: 20px") Age: #{player.age}
+          p(style="color: black; font-weight: bold; font-size: 20px") Position: #{player.position}
+          p(style="color: black; font-weight: bold; font-size: 20px") Team: #{player.team.club_name}
+          p(style="color: black; font-weight: bold; font-size: 20px") League: #{player.league.league_name}

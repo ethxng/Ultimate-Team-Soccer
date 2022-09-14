@@ -1,0 +1,41 @@
+extends layout 
+
+block content 
+  h1(style='color: #A45EE9')=title
+  br 
+  form.team_form(method='POST', action='')
+    .form-group
+      label(for="club_name", style='color: #6D2AFF') Club name: 
+      input#club_name.form-control(type='text', placeholder="Name of Team (ex: Manchester City)", required=true, name="club_name", value=(team===undefined ? '' : team.club_name))
+    .form-group 
+      label(for='coach_name', style='color: #6D2AFF') Coach name: 
+      input#coach_name.form-control(type='text', placeholder="Name of Coach", required=true, name="coach_name", value=(team===undefined ? '' : team.coach_name))
+    .form-group 
+      label(for='logo_color', style='color: #6D2AFF') Logo color: 
+      input#logo_color.form-control(type='text', placeholder="Team Logo Color", required=true, name="logo_color", value=(team===undefined ? '' : team.logo_color))
+    .form-group 
+      label(for="league", style='color: #6D2AFF') Choose your league 
+      select#league.form-control(type='select', placeholder ="Select league", required=true, name='league')
+        each league in all_leagues
+          if team && team.league._id.toString() === league._id.toString()
+            p Choosen
+            option(value=league._id, 
+              selected='selected',
+              ) #{league.league_name}
+          else
+            option(value=league._id) #{league.league_name}
+    if team 
+      .form-group
+        label(for='password', style='font-size: 25px; color: red') Enter your authorized password to update this team:
+        input#team_update.form-control(type='password', required=true, placeholder = "Password ...", name='password') 
+    button.btn.btn-primary(type='submit', style='background-color: #A45EE9; border-color: #A45EE9') Submit
+  if errors 
+    p errors spotted !! 
+    ul
+      for error in errors
+        li!= error.msg
+  if password != undefined && password === false 
+    h1(style='font-size: 40px; color: red') Wrong Password! Please try again.
+  
+    
+      

@@ -1,0 +1,18 @@
+extends layout 
+
+block content 
+  .player_detail
+    if player.photo != undefined
+        img.player_detail_pic(src='/images/' + player.photo alt='athlete picture')
+    else 
+        img.player_detail_pic(src='/images/who.png' alt='athlete picture')
+    p(style="color: red; font-weight: bold; font-size: 25px") Name: #{player.full_name}
+    p(style="color: red; font-weight: bold; font-size: 25px") Age: #{player.age}
+    p(style="color: red; font-weight: bold; font-size: 25px") Position: #{player.position}
+    p(style="color: red; font-weight: bold; font-size: 25px") Team: #{player.team.club_name}
+    p(style="color: red; font-weight: bold; font-size: 25px") League: #{player.league.league_name}
+    br
+    p
+      a(href=player.url+'/update', style='font-size: 30px') Update Player
+      p
+      a(href=player.url + '/delete', style='font-size: 30px') Delete Player
